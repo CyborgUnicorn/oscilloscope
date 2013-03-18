@@ -1,19 +1,31 @@
 {
-  "name": "application-name",
+  "name": "Oscilloscope",
   "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app",
-    "test": "mocha -R spec ./test/server/*"
+  "description": "An oscilloscope for the Lazer Rainbow",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
   },
   "dependencies": {
-    "express": "3.1.0",
-    "hjs": "*",
-    "less-middleware": "*",
+    "hjs": "~0.0.4",
+    "express": "~3.1.0",
+    "less-middleware": "~0.1.9",
     "node-hid": "~0.2.2",
-    "now": "~0.8.1"
+    "now": "~0.8.1",
+    "underscore": "~1.4.4"
   },
   "devDependencies": {
-    "grunt-mocha": "~0.2.3"
-  }
+    "chai": "~1.5.0",
+    "mocha": "~1.8.2",
+    "coffee-script": "~1.6.1"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha -R spec --compilers coffee:coffee-script test/**/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CyborgUnicorn/oscilloscope.git"
+  },
+  "license": "BSD"
 }
