@@ -41,3 +41,43 @@ describe 'Oscilloscope', ->
         should.not.exist device
         err.should.equal 'No such device'
         done()
+
+    it 'does not connect twice', ->
+      connects = 0
+      @oscilloscope.setDeviceFromPath = () ->
+        this.device = 1
+        connects++
+        this
+      @oscilloscope.connect 'LazerRainbow', () ->
+      @oscilloscope.connect 'LazerRainbow', () ->
+      connects.should.equal 1
+
+  describe '#disconnect', ->
+    it 'stops reading', (done) ->
+      @oscilloscope.stop = () ->
+        true.should.be.true
+        done()
+      @oscilloscope.disconnect()
+
+    it 'clears the device', ->
+      @oscilloscope.device = {}
+      @oscilloscope.disconnect()
+      should.not.exist @oscilloscope.device
+
+  describe '#start', ->
+    it 'sets shouldRead', ->
+      @oscilloscope.isReading = false
+      @oscilloscope.shouldRead = false
+      @oscilloscope.read = () ->
+      @oscilloscope.start()
+      @oscilloscope.shouldRead.should.be.true
+
+    it 'calls read', (done) ->
+      @oscilloscope.read = () ->
+        true.should.be.true
+        done()
+      @oscilloscope.start()
+
+    it 'returns if isReading is true', ->
+      
+

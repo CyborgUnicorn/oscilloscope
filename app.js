@@ -7,7 +7,10 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , nowjs = require('now')
+  , Oscilloscope = require('./lib/oscilloscope').Oscilloscope
+  , oscilloscope = new Oscilloscope(6);
 
 var app = express();
 
@@ -31,6 +34,42 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+var everyone = nowjs.initialize(server);
+
+everyone.now.connect = function() {
+
+  oscilloscope.stop();
+  oscilloscope.connect('Laser Rainbow', function(err) {
+
+    if(err) {
+      console.error(err);
+    } else {
+
+      oscilloscope.on('data', function(data) {
+        //console.log(data);
+        everyone.now.data(data);
+      });
+
+      oscilloscope.on('error', function(err) {
+        console.error(err);
+      });
+
+      everyone.now.start = function() {
+        oscilloscope.start();
+      };
+
+      everyone.now.stop = function() {
+        oscilloscope.stop();
+      };
+
+      oscilloscope.start();
+    }
+
+  });
+};

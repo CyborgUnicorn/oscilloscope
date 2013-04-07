@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "test": "mocha -R spec --compilers coffee:coffee-script test/**/*"
+    "test": "mocha -R nyan --compilers coffee:coffee-script test/**/*"
   },
   "repository": {
     "type": "git",
