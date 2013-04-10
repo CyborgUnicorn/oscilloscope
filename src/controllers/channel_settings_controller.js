@@ -1,0 +1,4 @@
+
+var ChannelSettingsController = function($scope) {
+
+};

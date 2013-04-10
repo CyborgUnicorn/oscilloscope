@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .content(ng-controller="ContentController")
+    .screen(cu-osc)
+    canvas(id="plot", width="1500", height="600", ng-controller="CanvasController")
+      nav(ng-controller="ChannelSettingsController")
+        ul.nav.pull-right
+          li(ng-repeat="channel in channels")
+            {{channel.name}}

@@ -12,9 +12,26 @@ describe 'MessageParser', ->
 
   describe '#reorganize', ->
 
-    it 'puts the first 8 values at the back', ->
-      result = @parser.reorganize [1..10]
-      result.should.eql [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]
+    it 'herps and derps', ->
+      result = @parser.reorganize [
+        2,2,2,3,2,4,2,5,
+        3,0,3,1,3,2,3,3,3,4,3,5,
+        4,0,4,1,4,2,4,3,4,4,4,5,
+        5,0,5,1,5,2,5,3,5,4,5,5,
+        6,0,6,1,6,2,6,3,6,4,6,5,
+        7,0,7,1,7,2,7,3,7,4,7,5,
+        8,0,8,1,8,2,8,3,8,4,8,5,
+        9,0,9,1,9,2,9,3,9,4,9,5,
+        0,0,0,1,0,2,0,3,0,4,0,5,
+        1,0,1,1,1,2,1,3,1,4,1,5,
+        2,0,2,1
+      ]
+      index = 0
+      for i in [0..9]
+        for j in [0..5]
+          result[index++].should.eql i
+          result[index++].should.eql j
+
 
   describe '#mapBytes', ->
 
