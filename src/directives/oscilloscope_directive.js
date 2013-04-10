@@ -50,7 +50,9 @@ angular
 
           context.clearRect(0, 0, width, height);
           for(var i=0; i<scope.data.channels.length; i++) {
+            context.save();
             renderChannel(i);
+            context.restore();
           }
         }
 
