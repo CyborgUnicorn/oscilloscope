@@ -9,7 +9,34 @@ a {
   color: #00B7FF;
 }
 
-.screen {
-	width: 1000px;
-	height: 500px;
+div.screen {
+  position: relative;
+  margin-top: 10px;
+  width: 1000px;
+  height: 500px;
+  background-color: #eeffee;
+  border: 1px solid #333;
+
+  canvas.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.debug {
+  position: absolute;
+  top: 5px;
+  left: 1000px;
+  width: 200px;
+  font-size: 8px;
+
+  span {
+    margin-right: 10px;
+  }
+}
+
+input[type='number'] {
+  width: 35px;
+  margin: 0 10px;
 }

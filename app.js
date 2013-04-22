@@ -9,7 +9,7 @@ var express = require('express')
   , path = require('path')
   , nowjs = require('now')
   , Oscilloscope = require('./lib/oscilloscope').Oscilloscope
-  , oscilloscope = new Oscilloscope(2);
+  , oscilloscope = new Oscilloscope(1);
 
 var app = express();
 
@@ -40,7 +40,6 @@ server.listen(app.get('port'), function(){
 });
 
 var everyone = nowjs.initialize(server);
-
 everyone.now.connect = function() {
 
   oscilloscope.stop();
@@ -51,7 +50,6 @@ everyone.now.connect = function() {
     } else {
 
       oscilloscope.on('data', function(data) {
-        //console.log(data);
         everyone.now.data(data);
       });
 
